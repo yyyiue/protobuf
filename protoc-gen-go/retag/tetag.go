@@ -4,7 +4,7 @@ import (
 	"bufio"
 	"bytes"
 	"fmt"
-	"github.com/golang/protobuf/protoc-gen-go/generator"
+	"github.com/yyyiue/protobuf/protoc-gen-go/generator"
 	"os"
 	"strconv"
 	"strings"

@@ -1,5 +1,2 @@
-github.com/yyyiue/protobuf v1.3.4 h1:4B3xHmTY9pC7sNcXaOK1hBu+u/w4dElRO2Bx+G2rWCU=
-github.com/yyyiue/protobuf v1.3.4/go.mod h1:zjdEzjBIO2QHYBxJTv3Evr2rh72D9Yo6pceleoxuIhc=
-github.com/yyyiue/protobuf v1.3.5/go.mod h1:fzEYVCggedaGvV6Yn5XMpJlhyCKwh/WUT2JaEf2UsXY=
-github.com/yyyiue/protobuf v1.3.6 h1:B6/rFE09aHslBrU3U/o+Ep++cJRb1h8dK2zHdSZe7lc=
-github.com/yyyiue/protobuf v1.3.6/go.mod h1:fr3mbnXPq9ZkoYlsMo/AZGnRa1pcgUjbGToz7atHEkE=
+github.com/yyyiue/protobuf v1.3.7 h1:Yg1Rhc0N00+/8XKKS2DmZWIPgcRN7g4aeGFpE0P6icA=
+github.com/yyyiue/protobuf v1.3.7/go.mod h1:LRCF7cwbcs+3gJlM2xBoq3V2QNN4DBjPJRmqflfczww=

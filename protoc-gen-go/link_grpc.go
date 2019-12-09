@@ -1,7 +1,7 @@
 // Go support for Protocol Buffers - Google's data interchange format
 //
 // Copyright 2015 The Go Authors.  All rights reserved.
-// https://github.com/golang/protobuf
+// https://github.com/yyyiue/protobuf
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -31,5 +31,5 @@
 
 package main
 
-import _ "github.com/golang/protobuf/protoc-gen-go/grpc"
-import _ "github.com/golang/protobuf/protoc-gen-go/retag"
+import _ "github.com/yyyiue/protobuf/protoc-gen-go/grpc"
+import _ "github.com/yyyiue/protobuf/protoc-gen-go/retag"
