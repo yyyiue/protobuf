@@ -19,9 +19,13 @@ enum CategoryType {
 
 // ChildOrder.
 message ChildOrder {
-  int64 number_aa = 1;   //`json:"number123,string"`
-  // 班级number.
-  int64 clazz_number = 2; //`json:"clazzNumber,int"`
-  // 课程类型.
-  CategoryType clazz_category = 3;  //`json:"clazzCategory1,int"`
+  map<string, int32> child_orders = 1; // `json:"childOrders"`
 }
+
+/*
+int64 number_aa = 1 ;   //`json:"number123,string"`
+// 班级number.
+int64 clazz_number = 2; //`json:"clazzNumber,int"`
+// 课程类型.
+CategoryType clazz_category = 3;  //`json:"clazzCategory1,int"`
+*/

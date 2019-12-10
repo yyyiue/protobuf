@@ -291,8 +291,8 @@ func (r *retag) needRetag(line string) bool {
 	return false
 }
 
+//reset default json
 func resetTag(line string, field string, tag string, maxlenField, maxlenTag int) string {
-	//reset default json
 	res := strings.Trim(strings.TrimRight(strings.TrimRight(line, "\n"), " "), "`")
 	if strings.Contains(line, "json:") && strings.Contains(tag, "json:") {
 		r := regexp.MustCompile(` json:"[\w]*,omitempty"`)
@@ -311,8 +311,8 @@ func resetTag(line string, field string, tag string, maxlenField, maxlenTag int)
 		}
 	}
 
+	res = strings.Trim(res, " ")
 	fs = append(fs, strings.Fields(tag)...)
-
 	for i := 2; i < len(fs); i++ {
 		if i == 2 {
 			format := "%-" + strconv.Itoa(len(`protobuf:"bytes,xxx,opt,name=`)+maxlenField) + "s "
