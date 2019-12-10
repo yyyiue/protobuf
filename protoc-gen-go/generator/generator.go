@@ -57,7 +57,6 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	"github.com/yyyiue/protobuf/gsxproto"
 	"github.com/yyyiue/protobuf/proto"
 	"github.com/yyyiue/protobuf/protoc-gen-go/generator/internal/remap"
 
