@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/yyyiue/protobuf/protoc-gen-go/generator"
 	"os"
+	"regexp"
 	"strconv"
 	"strings"
 )
@@ -97,12 +98,18 @@ func (r *retag) getStructTags(filename string) {
 				continue
 			}
 
-			k, v := getFieldTag(string(line), msgNameStack.GetPOP())
+			k, v := getFieldAndTag(string(line), msgNameStack.GetPOP())
 
 			if len(strings.Split(k, ".")) <= 1 {
 				continue
 			}
 
+
+			// panic(string(line))
+			//  int64 number_aa = 1;   //`json:"number123,string"`
+
+			// panic(k)
+			//ChildOrder.number_aa
 			r.tags[k] = v
 
 			if len(strings.Split(k, ".")[1]) > r.fieldMaxLen {
@@ -117,9 +124,20 @@ func (r *retag) getStructTags(filename string) {
 			}
 		}
 	}
+
+	//for k, v := range r.tags {
+	//	fmt.Println(k, v)
+	//}
+	/**
+	ChildOrder.Number->json:"number123,string"
+	ChildOrder.clazz_number->json:"clazzNumber,int"
+	ChildOrder.clazz_category->json:"clazzCategory1,int"
+	**/
 }
 
-func getFieldTag(line string, msgName string) (field string, tag string) {
+// line 字段所在proto文件中的一行
+// msgName 字段所属message
+func getFieldAndTag(line string, msgName string) (field string, tag string) {
 	fts := strings.Split(line, "//")
 	if len(fts) <= 1 {
 		return "", ""
@@ -133,11 +151,27 @@ func getFieldTag(line string, msgName string) (field string, tag string) {
 		if i == fsl-1 {
 			field += fs[i]
 			break
-		} else {
-			if fs[i+1] == "=" {
-				field += fs[i]
-				break
+		}
+
+		if fs[i+1] == "=" {
+			flag := false
+			for k, c := range fs[i] {
+				if k == 0 {
+					field += strings.ToUpper(string(c))
+					continue
+				}
+				if c == '_' {
+					flag = true
+					continue
+				}
+				if flag {
+					field += strings.ToUpper(string(c))
+					flag = false
+				} else {
+					field += string(c)
+				}
 			}
+			break
 		}
 	}
 
@@ -166,6 +200,7 @@ func (r *retag) retag() {
 	}
 
 	readbuf := bytes.NewBuffer([]byte{})
+	// r.gen.Buffer.Bytes() 生成器生成的 Go 代码
 	readbuf.Write(r.gen.Buffer.Bytes())
 	buf := bytes.NewBuffer([]byte{})
 
@@ -173,6 +208,7 @@ func (r *retag) retag() {
 	var comment bool
 	msgNameStack := NewStack()
 	for {
+		// 不断读取生成的 Go 代码
 		line, _, err := reader.ReadLine()
 		if err != nil {
 			buf.WriteString("\n")
@@ -222,8 +258,12 @@ func (r *retag) retag() {
 				continue
 			}
 
+			//panic(string(line))
+			//NumberAa int64   `protobuf:"varint,1,opt,name=number_aa,json=numberAa,proto3" json:"number_aa,omitempty"`
 			fields := strings.Fields(strings.TrimSpace(string(line)))
 			key := msgNameStack.GetPOP() + "." + fields[0]
+			//panic(key)
+			//ChildOrder.NumberAa
 			tag := r.tags[key]
 			newline := resetTag(string(line), fields[0], tag, r.fieldMaxLen, r.tagMaxLen)
 			buf.WriteString(newline)
@@ -235,6 +275,7 @@ func (r *retag) retag() {
 	}
 
 	r.gen.Buffer.Reset()
+	// data 为要生成的 .go 文件内容
 	data := buf.Bytes()
 	r.gen.Buffer.Write(data)
 }
@@ -254,9 +295,13 @@ func (r *retag) needRetag(line string) bool {
 func resetTag(line string, field string, tag string, maxlenField, maxlenTag int) string {
 	//reset default json
 	res := strings.Trim(strings.TrimRight(strings.TrimRight(line, "\n"), " "), "`")
+	// TODO
 	if strings.Contains(line, "json:") && strings.Contains(tag, "json:") {
-		substr := " json:\"" + field + ",omitempty\""
-		res = strings.Replace(res, substr, "", -1)
+
+		r := regexp.MustCompile(` json:"[\w]*,omitempty"`)
+		res = r.ReplaceAllString(res, "")
+		//substr := " json:\"" + field + ",omitempty\""
+		//res = strings.Replace(res, substr, "", -1)
 	}
 
 	fs := strings.Fields(res)
