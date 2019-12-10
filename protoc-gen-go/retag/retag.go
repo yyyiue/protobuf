@@ -315,7 +315,7 @@ func resetTag(line string, field string, tag string, maxlenField, maxlenTag int)
 
 	for i := 2; i < len(fs); i++ {
 		if i == 2 {
-			format := "%-" + strconv.Itoa(len(`protobuf:"bytes,xxx,opt,name=`)+maxlenField) + "s  "
+			format := "%-" + strconv.Itoa(len(`protobuf:"bytes,xxx,opt,name=`)+maxlenField) + "s "
 			res += fmt.Sprintf(format, fs[i])
 		} else if i != len(fs)-1 {
 			format := "%-" + strconv.Itoa(len(fs[i])-len(strings.Trim(strings.Split(fs[i], ":")[1], "\""))+maxlenTag) + "s  "
@@ -326,6 +326,5 @@ func resetTag(line string, field string, tag string, maxlenField, maxlenTag int)
 	}
 
 	res += "`"
-
 	return res
 }

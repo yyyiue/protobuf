@@ -8,9 +8,6 @@ option java_outer_classname = "EntityProto";
 option java_package = "com.gsx.data.order.order.v2";
 option php_namespace = "Gsx\\Data\\Order\\Order\\V2";
 
-//import "gsx/data/course/v2/vo/value_object.proto";
-//import "gsx/data/order/v2/vo/order/value_object.proto";
-
 // CategoryType 班级分类.
 enum CategoryType {
   CATEGORY_TYPE_INVALID = 0;
