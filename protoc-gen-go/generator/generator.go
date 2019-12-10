@@ -57,6 +57,7 @@ import (
 	"unicode"
 	"unicode/utf8"
 
+	"github.com/yyyiue/protobuf/gsxproto"
 	"github.com/yyyiue/protobuf/proto"
 	"github.com/yyyiue/protobuf/protoc-gen-go/generator/internal/remap"
 
@@ -1753,6 +1754,12 @@ func (g *Generator) defaultConstantName(goMessageType, protoFieldName string) st
 	return "Default_" + goMessageType + "_" + CamelCase(protoFieldName)
 }
 
+//func (g *Generator) Test() string {
+//	v, _ := proto.GetExtension(g.file.FileDescriptorProto, gsxproto.E_Jsontag)
+//	panic(v.(string))
+//	return v.(string)
+//}
+
 // The different types of fields in a message and how to actually print them
 // Most of the logic for generateMessage is in the methods of these types.
 //
@@ -2264,7 +2271,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			of := oneofField{
 				fieldCommon: fieldCommon{
 					goName:     fname,
-					getterName: "Get"+fname,
+					getterName: "Get" + fname,
 					goType:     dname,
 					tags:       tag,
 					protoName:  odp.GetName(),

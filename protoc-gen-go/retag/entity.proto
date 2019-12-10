@@ -8,6 +8,8 @@ option java_outer_classname = "EntityProto";
 option java_package = "com.gsx.data.order.order.v2";
 option php_namespace = "Gsx\\Data\\Order\\Order\\V2";
 
+import "gsx.proto";
+
 // CategoryType 班级分类.
 enum CategoryType {
   CATEGORY_TYPE_INVALID = 0;
@@ -19,13 +21,11 @@ enum CategoryType {
 
 // ChildOrder.
 message ChildOrder {
-  map<string, int32> child_orders = 1; // `json:"childOrders"`
-}
+    int64 number_aa = 1 [(gsx.jsontag) = "number12,string"];
+    // 班级number.
+    int64 clazz_number = 2; //`json:"clazzNumber,int"`
+    // 课程类型.
+    CategoryType clazz_category = 3;  //`json:"clazzCategory1,int"`
 
-/*
-int64 number_aa = 1 ;   //`json:"number123,string"`
-// 班级number.
-int64 clazz_number = 2; //`json:"clazzNumber,int"`
-// 课程类型.
-CategoryType clazz_category = 3;  //`json:"clazzCategory1,int"`
-*/
+    map<string, int32> child_orders = 4; // `json:"childOrders"`
+}

@@ -60,7 +60,6 @@ func (r *retag) getStructTags(filename string) {
 			break
 		}
 
-		//skip empty line in message
 		if len(line) <= 0 {
 			continue
 		}
@@ -78,7 +77,6 @@ func (r *retag) getStructTags(filename string) {
 			continue
 		}
 
-		//fmt.Println("------", string(line))
 		if strings.HasPrefix(strings.TrimSpace(string(line)), "message") {
 			if msgNameStack.GetPOP() != "" {
 				msgNameStack.PUSH(msgNameStack.GetPOP() + "_" + strings.Fields(string(line))[1])
@@ -177,6 +175,12 @@ func getFieldAndTag(line string, msgName string) (field string, tag string) {
 	tag = strings.TrimSpace(tag)
 	tag = strings.Trim(tag, "`")
 	tag = trimInside(tag)
+
+	//panic(field)
+	//ChildOrder.ClazzNumber
+
+	//panic(tag)
+	//json:"clazzNumber,int"
 
 	return
 }
