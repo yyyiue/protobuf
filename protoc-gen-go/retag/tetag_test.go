@@ -17,9 +17,9 @@ func Test_getFieldAndTag(t *testing.T) {
 
 	var tests = make([]test, 0)
 	tests = append(tests, test{
-		name:      "case1",
-		args:      args{
-			line: "  int64 number_aa = 1;   //`json:\"number123,string\"`",
+		name: "case1",
+		args: args{
+			line:    "  int64 number_aa = 1;   //`json:\"number123,string\"`",
 			msgName: "ChildOrder",
 		},
 		wantField: "ChildOrder.NumberAa",

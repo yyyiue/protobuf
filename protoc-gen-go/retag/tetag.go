@@ -104,7 +104,6 @@ func (r *retag) getStructTags(filename string) {
 				continue
 			}
 
-
 			// panic(string(line))
 			//  int64 number_aa = 1;   //`json:"number123,string"`
 
@@ -295,9 +294,7 @@ func (r *retag) needRetag(line string) bool {
 func resetTag(line string, field string, tag string, maxlenField, maxlenTag int) string {
 	//reset default json
 	res := strings.Trim(strings.TrimRight(strings.TrimRight(line, "\n"), " "), "`")
-	// TODO
 	if strings.Contains(line, "json:") && strings.Contains(tag, "json:") {
-
 		r := regexp.MustCompile(` json:"[\w]*,omitempty"`)
 		res = r.ReplaceAllString(res, "")
 		//substr := " json:\"" + field + ",omitempty\""
