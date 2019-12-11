@@ -5,7 +5,7 @@ package extension_extra
 
 import (
 	fmt "fmt"
-	proto "github.com/yyyiue/protobuf/proto"
+	proto "github.com/golang/protobuf/proto"
 	math "math"
 )
 

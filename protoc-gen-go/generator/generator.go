@@ -1,7 +1,7 @@
 // Go support for Protocol Buffers - Google's data interchange format
 //
 // Copyright 2010 The Go Authors.  All rights reserved.
-// https://github.com/yyyiue/protobuf
+// https://github.com/golang/protobuf
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -57,12 +57,12 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	"github.com/yyyiue/protobuf/proto"
-	"github.com/yyyiue/protobuf/protoc-gen-go/generator/internal/remap"
+	"github.com/golang/protobuf/proto"
+	"github.com/golang/protobuf/protoc-gen-go/generator/internal/remap"
 
-	"github.com/yyyiue/protobuf/protoc-gen-go/descriptor"
-	plugin "github.com/yyyiue/protobuf/protoc-gen-go/plugin"
-	"github.com/yyyiue/protobuf/gsxv1"
+	"github.com/golang/protobuf/gsxv1"
+	"github.com/golang/protobuf/protoc-gen-go/descriptor"
+	plugin "github.com/golang/protobuf/protoc-gen-go/plugin"
 )
 
 // generatedCodeVersion indicates a version of the generated code.
@@ -1319,7 +1319,7 @@ func (g *Generator) generateImports() {
 	g.P("import (")
 	g.P(g.Pkg["fmt"] + ` "fmt"`)
 	g.P(g.Pkg["math"] + ` "math"`)
-	g.P(g.Pkg["proto"]+" ", GoImportPath(g.ImportPrefix)+"github.com/yyyiue/protobuf/proto")
+	g.P(g.Pkg["proto"]+" ", GoImportPath(g.ImportPrefix)+"github.com/golang/protobuf/proto")
 	for importPath, packageName := range imports {
 		g.P(packageName, " ", GoImportPath(g.ImportPrefix)+importPath)
 	}
@@ -2273,7 +2273,7 @@ func (g *Generator) generateMessage(message *Descriptor) {
 			of := oneofField{
 				fieldCommon: fieldCommon{
 					goName:     fname,
-					getterName: "Get"+fname,
+					getterName: "Get" + fname,
 					goType:     dname,
 					tags:       tag,
 					protoName:  odp.GetName(),

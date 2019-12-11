@@ -1,11 +1,11 @@
 # Go support for Protocol Buffers - Google's data interchange format
 
 [![Build Status](https://travis-ci.org/golang/protobuf.svg?branch=master)](https://travis-ci.org/golang/protobuf)
-[![GoDoc](https://godoc.org/github.com/yyyiue/protobuf?status.svg)](https://godoc.org/github.com/yyyiue/protobuf)
+[![GoDoc](https://godoc.org/github.com/golang/protobuf?status.svg)](https://godoc.org/github.com/golang/protobuf)
 
 Google's data interchange format.
 Copyright 2010 The Go Authors.
-https://github.com/yyyiue/protobuf
+https://github.com/golang/protobuf
 
 This package and the code it generates requires at least Go 1.9.
 
@@ -25,7 +25,7 @@ To use this software, you must:
   for details or, if you are using gccgo, follow the instructions at
 	https://golang.org/doc/install/gccgo
 - Grab the code from the repository and install the `proto` package.
-  The simplest way is to run `go get -u github.com/yyyiue/protobuf/protoc-gen-go`.
+  The simplest way is to run `go get -u github.com/golang/protobuf/protoc-gen-go`.
   The compiler plugin, `protoc-gen-go`, will be installed in `$GOPATH/bin`
   unless `$GOBIN` is set. It must be in your `$PATH` for the protocol
   compiler, `protoc`, to find it.
@@ -33,9 +33,9 @@ To use this software, you must:
   `proto` package version), one option is
   ```shell
   GIT_TAG="v1.2.0" # change as needed
-  go get -d -u github.com/yyyiue/protobuf/protoc-gen-go
-  git -C "$(go env GOPATH)"/src/github.com/yyyiue/protobuf checkout $GIT_TAG
-  go install github.com/yyyiue/protobuf/protoc-gen-go
+  go get -d -u github.com/golang/protobuf/protoc-gen-go
+  git -C "$(go env GOPATH)"/src/github.com/golang/protobuf checkout $GIT_TAG
+  go install github.com/golang/protobuf/protoc-gen-go
   ```
 
 This software has two parts: a 'protocol compiler plugin' that
@@ -72,7 +72,7 @@ each source `.proto` file is associated with a single Go package. The
 name and import path for this package is specified with the `go_package`
 proto option:
 
-	option go_package = "github.com/yyyiue/protobuf/ptypes/any";
+	option go_package = "github.com/golang/protobuf/ptypes/any";
 
 The protocol buffer compiler will attempt to derive a package name and
 import path if a `go_package` option is not present, but it is
@@ -86,14 +86,14 @@ The output name of a generated file is produced by replacing the
 `.proto` suffix with `.pb.go` (e.g., `foo.proto` produces `foo.pb.go`).
 However, the output directory is selected in one of two ways.  Let
 us say we have `inputs/x.proto` with a `go_package` option of
-`github.com/yyyiue/protobuf/p`. The corresponding output file may
+`github.com/golang/protobuf/p`. The corresponding output file may
 be:
 
 - Relative to the import path:
 
 ```shell
   protoc --go_out=. inputs/x.proto
-  # writes ./github.com/yyyiue/protobuf/p/x.pb.go
+  # writes ./github.com/golang/protobuf/p/x.pb.go
 ```
 
   (This can work well with `--go_out=$GOPATH`.)
@@ -180,7 +180,7 @@ To create and play with a Test object from the example package,
 	import (
 		"log"
 
-		"github.com/yyyiue/protobuf/proto"
+		"github.com/golang/protobuf/proto"
 		"path/to/example"
 	)
 

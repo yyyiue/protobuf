@@ -1,7 +1,9 @@
 package gsxv1
 
-import "github.com/yyyiue/protobuf/protoc-gen-go/descriptor"
-import proto "github.com/yyyiue/protobuf/proto"
+import (
+	proto "github.com/golang/protobuf/proto"
+	"github.com/golang/protobuf/protoc-gen-go/descriptor"
+)
 
 //func IsEmbed(field *descriptor.FieldDescriptorProto) bool {
 //	return proto.GetBoolExtension(field.Options, E_Embed, false)

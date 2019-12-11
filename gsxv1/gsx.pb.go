@@ -5,8 +5,8 @@ package gsxv1
 
 import (
 	fmt "fmt"
-	descriptor "github.com/yyyiue/protobuf/protoc-gen-go/descriptor"
-	proto "github.com/yyyiue/protobuf/proto"
+	descriptor "github.com/golang/protobuf/protoc-gen-go/descriptor"
+	proto "github.com/golang/protobuf/proto"
 	math "math"
 )
 

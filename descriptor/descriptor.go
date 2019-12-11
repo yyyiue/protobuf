@@ -1,7 +1,7 @@
 // Go support for Protocol Buffers - Google's data interchange format
 //
 // Copyright 2016 The Go Authors.  All rights reserved.
-// https://github.com/yyyiue/protobuf
+// https://github.com/golang/protobuf
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -42,8 +42,8 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	"github.com/yyyiue/protobuf/proto"
-	protobuf "github.com/yyyiue/protobuf/protoc-gen-go/descriptor"
+	"github.com/golang/protobuf/proto"
+	protobuf "github.com/golang/protobuf/protoc-gen-go/descriptor"
 )
 
 // extractFile extracts a FileDescriptorProto from a gzip'd buffer.

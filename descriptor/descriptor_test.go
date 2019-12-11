@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/yyyiue/protobuf/descriptor"
-	tpb "github.com/yyyiue/protobuf/proto/test_proto"
-	protobuf "github.com/yyyiue/protobuf/protoc-gen-go/descriptor"
+	"github.com/golang/protobuf/descriptor"
+	tpb "github.com/golang/protobuf/proto/test_proto"
+	protobuf "github.com/golang/protobuf/protoc-gen-go/descriptor"
 )
 
 func TestMessage(t *testing.T) {
