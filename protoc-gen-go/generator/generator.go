@@ -1362,7 +1362,8 @@ func (g *Generator) generateEnum(enum *EnumDescriptor) {
 	typeName := enum.TypeName()
 	// The full type name, CamelCased.
 	ccTypeName := CamelCaseSlice(typeName)
-	ccPrefix := enum.prefix()
+	//ccPrefix := enum.prefix()
+	ccPrefix := ""
 
 	deprecatedEnum := ""
 	if enum.GetOptions().GetDeprecated() {
@@ -1742,7 +1743,8 @@ func (g *Generator) getterDefault(field *descriptor.FieldDescriptorProto, goMess
 			return "0 // empty enum"
 		}
 		first := enum.Value[0].GetName()
-		return g.DefaultPackageName(obj) + enum.prefix() + first
+		//return g.DefaultPackageName(obj) + enum.prefix() + first
+		return g.DefaultPackageName(obj) + first
 	default:
 		return "0"
 	}
@@ -2040,7 +2042,8 @@ func (g *Generator) generateDefaultConstants(mc *msgCtx, topLevelFields []topLev
 				log.Printf("don't know how to generate constant for %s", fieldname)
 				continue
 			}
-			def = g.DefaultPackageName(obj) + enum.prefix() + def
+			//def = g.DefaultPackageName(obj) + enum.prefix() + def
+			def = g.DefaultPackageName(obj) + def
 		}
 		g.P(kind, fieldname, " ", typename, " = ", def)
 		g.file.addExport(mc.message, constOrVarSymbol{fieldname, kind, ""})
@@ -2231,14 +2234,6 @@ func (g *Generator) generateMessage(message *Descriptor) {
 
 	// Build a structure more suitable for generating the text in one pass
 	for i, field := range message.Field {
-		if field.Options != nil {
-			v, err := proto.GetExtension(field.Options, gsxv1.E_Jsontag)
-			if err == nil && v.(*string) != nil {
-				if *(v.(*string)) == "panic" {
-					panic(v)
-				}
-			}
-		}
 		// Allocate the getter and the field at the same time so name
 		// collisions create field/method consistent names.
 		// TODO: This allocation occurs based on the order of the fields
@@ -2249,7 +2244,12 @@ func (g *Generator) generateMessage(message *Descriptor) {
 		fieldName, fieldGetterName := ns[0], ns[1]
 		typename, wiretype := g.GoType(message, field)
 		jsonName := *field.Name
-		tag := fmt.Sprintf("protobuf:%s json:%q", g.goTag(message, field, wiretype), jsonName+",omitempty")
+		jsonTag := jsonName + ",omitempty"
+		gsxJsonTag := gsxv1.GetJsonTag(field)
+		if gsxJsonTag != nil {
+			jsonTag = *gsxJsonTag
+		}
+		tag := fmt.Sprintf("protobuf:%s json:%q", g.goTag(message, field, wiretype), jsonTag)
 
 		oneof := field.OneofIndex != nil
 		if oneof && oFields[*field.OneofIndex] == nil {

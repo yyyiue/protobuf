@@ -8,7 +8,7 @@ service SearchService {
 }
 
 message SearchRequest {
-    string request = 1 [(gsx.v1.jsontag) = "panic"];
+    string request = 1 [(gsx.v1.jsontag) = "request1,string"];
 }
 
 message SearchResponse {
