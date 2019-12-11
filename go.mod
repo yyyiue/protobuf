@@ -1,6 +1,6 @@
 module github.com/yyyiue/protobuf
 
-replace github.com/golang/protobuf => github.com/yyyiue/protobuf v1.4.8
+replace github.com/golang/protobuf => github.com/yyyiue/protobuf v1.4.9
 
 go 1.12
 
