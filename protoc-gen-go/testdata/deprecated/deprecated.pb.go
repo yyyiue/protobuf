@@ -8,7 +8,7 @@ package deprecated
 import (
 	context "context"
 	fmt "fmt"
-	proto "github.com/golang/protobuf/proto"
+	proto "github.com/yyyiue/protobuf/proto"
 	grpc "google.golang.org/grpc"
 	math "math"
 )
